@@ -58,7 +58,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "relay": "libs/relay-compiler-patched --src ./src --schema ./schema.json",
-    "updateSchema": "babel-node scripts/updateSchema.js"
+    "updateSchema": "export BABEL_ENV=development && NODE_ENV=$BABEL_ENV && babel-node scripts/updateSchema.js"
   },
   "jest": {
     "collectCoverageFrom": [
