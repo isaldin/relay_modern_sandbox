@@ -12,6 +12,9 @@ const mutation = graphql`
         id
         title
         description
+        author {
+          id
+        }
       }
     }
   }
@@ -24,6 +27,7 @@ export default function CreatePostMutation(description, title, viewerId, callbac
     input: {
       description,
       title,
+      authorId: "cjammlzmgzyhq0112lqt44hjw",
       clientMutationId: ""
     },
   }
