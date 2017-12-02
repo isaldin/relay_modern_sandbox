@@ -41,23 +41,13 @@ class CreatePage extends React.Component {
                   />
                   <input
                     className='w-100 pa3 mv2'
-                    value={this.state.imageUrl}
+                    value={this.state.title}
                     placeholder='Image Url'
                     onChange={(e) => this.setState({title: e.target.value})}
                   />
-                  {this.state.imageUrl &&
-                    <img 
-                      src={this.state.imageUrl} 
-                      alt={this.state.description} 
-                      className='w-100 mv3' 
-                    />
-                  }
                   {this.state.description && this.state.title &&
-                    <button className='pa3 bg-black-10 bn dim ttu pointer' onClick={() => this._handlePost(props.viewer.id)}>Post</button>
+                    <button className='pa3 bg-black-10 bn dim ttu pointer' onClick={() => {this._handlePost(props.viewer.id); this.setState({description: '', title: ''});}}>Post</button>
                   }
-                  <div style={{textAlign: "center", color: "red"}}>
-                    <Link to="/" >Cancel</Link>
-                  </div>
                 </div>
               </div>
             )
@@ -70,7 +60,7 @@ class CreatePage extends React.Component {
 
   _handlePost = (viewerId) => {
     const {description, title} = this.state
-    CreatePostMutation(description, title, viewerId,  () => this.props.history.replace('/'))
+    CreatePostMutation(description, title, viewerId, () => {});
   }
 
 }

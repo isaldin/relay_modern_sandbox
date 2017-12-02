@@ -13,7 +13,7 @@ const mutation = graphql`
   }
 `;
 
-export default function DeletePostMutation(postId, viewerId) {
+export default function DeletePostMutation(postId, viewerId, callback) {
   const variables = {
     input: {
       id: postId,
@@ -25,6 +25,9 @@ export default function DeletePostMutation(postId, viewerId) {
     {
       mutation,
       variables,
+      onCompleted: response => {
+        callback();
+      },
       onError: err => console.error(err),
       updater: (proxyStore) => {
         const deletePostField = proxyStore.getRootField('deletePost')
