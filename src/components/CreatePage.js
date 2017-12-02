@@ -16,7 +16,7 @@ class CreatePage extends React.Component {
 
   state = {
     description: '',
-    imageUrl: '',
+    title: '',
   }
 
   render () {
@@ -43,7 +43,7 @@ class CreatePage extends React.Component {
                     className='w-100 pa3 mv2'
                     value={this.state.imageUrl}
                     placeholder='Image Url'
-                    onChange={(e) => this.setState({imageUrl: e.target.value})}
+                    onChange={(e) => this.setState({title: e.target.value})}
                   />
                   {this.state.imageUrl &&
                     <img 
@@ -52,7 +52,7 @@ class CreatePage extends React.Component {
                       className='w-100 mv3' 
                     />
                   }
-                  {this.state.description && this.state.imageUrl &&
+                  {this.state.description && this.state.title &&
                     <button className='pa3 bg-black-10 bn dim ttu pointer' onClick={() => this._handlePost(props.viewer.id)}>Post</button>
                   }
                   <div style={{textAlign: "center", color: "red"}}>
@@ -69,8 +69,8 @@ class CreatePage extends React.Component {
   }
 
   _handlePost = (viewerId) => {
-    const {description, imageUrl} = this.state
-    CreatePostMutation(description, imageUrl, viewerId,  () => this.props.history.replace('/'))
+    const {description, title} = this.state
+    CreatePostMutation(description, title, viewerId,  () => this.props.history.replace('/'))
   }
 
 }

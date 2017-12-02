@@ -1,9 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { introspectionQuery } from 'graphql/utilities';
+import { introspectionQuery, printSchema } from 'graphql/utilities';
 import fetch from 'node-fetch';
 
 // Save JSON of full schema introspection for Babel Relay Plugin to use
+
+// export BABEL_ENV=development && NODE_ENV=$BABEL_ENV
 
 const run = () => {
   fetch(`https://api.graph.cool/relay/v1/cjamlrgux1wbw0113587gjirq`, {
@@ -25,9 +27,13 @@ const run = () => {
           path.join(__dirname, '../schema.json'),
           JSON.stringify(result, null, 2)
         );
+        // fs.writeFileSync(
+        //   path.join(__dirname, '../schema.graphql'),
+        //   printSchema(result)
+        // );
       }
     })
-    .catch(err => console.error(JSON.stringify({err})))
+    .catch(err => console.error(err));
 };
 
 run();

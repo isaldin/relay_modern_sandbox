@@ -1,1 +1,5 @@
-undefined
+query ViewerId {
+    viewer {
+        id
+    }
+}

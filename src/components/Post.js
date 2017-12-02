@@ -42,7 +42,7 @@ const FragmentContainer =  createFragmentContainer(Post, graphql`
   fragment Post_post on Post {
     id
     description
-    imageUrl
+    title
   }
 `)
 
