@@ -1,9 +1,9 @@
-const {
+import {
   Environment,
   Network,
   RecordSource,
   Store,
-} = require('relay-runtime')
+} from 'relay-runtime';
 
 
 function fetchQuery(
