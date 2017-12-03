@@ -5,6 +5,7 @@ import {
 } from 'react-relay';
 import DeletePostMutation from '../mutations/DeletePostMutation';
 import { withRouter } from 'react-router-dom';
+import CommentsPage from './CommentsPage';
 
 class Post extends React.Component {
 
@@ -19,6 +20,7 @@ class Post extends React.Component {
             onClick={this._handleDelete}
           >Delete</span>
         </div>
+        <CommentsPage post={this.props.post} comments={this.props.post.comments} />
       </div>
     )
   }
@@ -39,7 +41,14 @@ const FragmentContainer =  createFragmentContainer(Post, graphql`
     author {
       id
     }
+    comments {
+      edges {
+        node {
+          ...Comment_comment
+        }
+      }
+    }
   }
-`)
+`);
 
 export default withRouter(FragmentContainer);
