@@ -4,8 +4,20 @@ import {
   graphql
 } from 'react-relay';
 
+import DeleteCommentMutation from '../mutations/DeleteCommentMutation';
+
 const Comment = ({comment}) => {
-  return <p>{comment.text}</p>;
+  return (
+    <div>
+      <p>{comment.text}&nbsp;
+        <span
+          onClick={() => DeleteCommentMutation(comment.id)}
+          style={{color: 'red', cursor: 'pointer',}}>
+          [-]
+        </span>
+      </p>
+    </div>
+  );
 };
 
 const CommentFragmentContainer = createFragmentContainer(Comment, graphql`

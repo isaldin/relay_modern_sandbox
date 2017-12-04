@@ -24,6 +24,7 @@ class CommentsPage extends Component {
     if (!post) return <div>Loading...</div>;
 
     const {id: postId} = post;
+    const commentEdges = comments && comments.edges.filter(edge => edge.node !== null && edge.node !== undefined);
     return (
       <div className="comments-page">
         <div className='w-80 fl justify-center'>
@@ -43,11 +44,11 @@ class CommentsPage extends Component {
             </button>
           </div>
         </div>
-        {comments && (
+        {commentEdges && (
           <div>
-            <span>Comments {postId}({comments.edges.length})</span>
+            <span>Comments {postId}({commentEdges.length})</span>
             <div className="comments fl w-100">
-              {comments.edges.map(edge => (
+              {commentEdges.map(edge => (
                 <div key={edge.node.id}>
                   <Comment key={edge.node.id} comment={edge.node} />
                 </div>
