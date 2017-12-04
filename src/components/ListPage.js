@@ -15,7 +15,7 @@ class ListPage extends React.Component {
     return (
       <div className='fl w-100 flex justify-center flex-wrap'>
         <div className='fl w-100'>
-          {this.props.viewer.allPosts.edges.filter(item => item.node !== undefined).reverse().map(({node}) =>
+          {this.props.viewer.allPosts.edges.filter(item => item && item.node !== undefined).reverse().map(({node}) =>
             <Post key={node.id} post={node} viewer={this.props.viewer} onDelete={this.handleDelete} />
           )}
         </div>
@@ -30,17 +30,17 @@ class ListPage extends React.Component {
 export default createRefetchContainer(ListPage, {
   viewer: graphql`
     fragment ListPage_viewer on Viewer {
-        ...Post_viewer
-        allPosts(last: 5) @connection(key: "ListPage_allPosts", filters: []) {
-            edges {
-                node {
-                    id
-                    description
-                    title
-                    ...Post_post
-                }
-            }
+      ...Post_viewer
+      allPosts(last: 5) @connection(key: "ListPage_allPosts", filters: []) {
+        edges {
+          node {
+            id
+            description
+            title
+            ...Post_post
+          }
         }
+      }
     }
   `},
   graphql`

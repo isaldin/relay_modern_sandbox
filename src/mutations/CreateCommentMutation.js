@@ -17,6 +17,11 @@ const mutation = graphql`
          id
         }
       }
+      edge {
+        node {
+          ...Comment_comment
+        }
+      }
     }
   }
 `;
@@ -33,6 +38,15 @@ const CreateCommentMutation = (text, postId, authorId, callback) => {
         clientMutationId: "",
       },
     },
+    configs: [{
+      type: 'RANGE_ADD',
+      parentID: postId,
+      connectionInfo: [{
+        key: 'Post_comments',
+        rangeBehavior: 'append',
+      }],
+      edgeName: 'edge',
+    }],
     onError: err => console.error(err),
     onCompleted: () => { if (callback) callback(); },
   });

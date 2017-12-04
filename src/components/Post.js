@@ -41,7 +41,7 @@ const FragmentContainer =  createFragmentContainer(Post, graphql`
     author {
       id
     }
-    comments {
+    comments(last: 1000) @connection(key: "Post_comments", filters: []) {
       edges {
         node {
           ...Comment_comment
